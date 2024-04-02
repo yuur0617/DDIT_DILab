@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="kr.or.ddit.case1" use-default-filters="true">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+	
+<!-- 	어노테이션 기반의 자동 주입 구조 -->
+<!-- 	1. 어노테이션 포스트 프로세서가 등록되어야 함. : <context:annotation-config /> -->
+<!-- 	2. 특정 영역의 클래스 중 일정 조건을 만족하는 경우, bean으로 등록시켜야 함. : <context:component-scan /> -->
+<!--  		@Component : 나머지 어노테이션에서 공통 적용된 메타 어노테이션으로 컴포넌트 스캐너에서 유일하게 스캔하는 대상 -->
+<!-- 		@Repository : P.L (dao) 				-->
+<!-- 		@Service : B.L.L (service) 				-->
+<!-- 		@Controller : C.L (controller) 에 사용하고, (컨테이너에 등록되면서 동시에 handler mapping 에 의해 수집됨.) -->
+		
+<!-- 		@Configuration 							-->
+		
+<!-- 		웹에서만 사용가능 							-->
+<!-- 		@RestController 						-->
+<!-- 		@ControllerAdvice 						-->
+<!-- 		@RestControllerAdvice 					-->
+		
+<!-- 		주입을 비롯한 bean의 구체적 설절을 변경할때 사용되는 어노테이션 -->
+<!-- 		@AutoWired : 주입에 사용됨. (클래스 타입 기준 주입) -->
+<!-- 		@Inject == @AutoWired -->
+<!-- 		@Resource : 주입에 사용됨. (주입 기준을 동적으로 설정할 수 있음.) -->
+<!-- 		@Required   							-->
+<!-- 		@PostContruct 							-->
+<!-- 		@PreDestroy 							-->
+</beans>

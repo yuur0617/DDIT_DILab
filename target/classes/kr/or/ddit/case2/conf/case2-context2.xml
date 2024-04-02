@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	>
+
+<!-- 	bean 등록 순서 : bibitan, shotgun, hunter 순서로 등록 		-->
+<!-- 	bean 객체 생성 순서 : hunter, bibitan, shotgun 순서로 생성  	-->
+<!-- 	모든 객체는 주입하기 전까지 생성을 지연시킴.						 	-->
+<!-- 	hunter가 attack하기 전에 공격 시점을 확보하고, log로 출력함.  	 	-->
+<!-- 	단, localDateTime객체는 직접 생성하지 않고, 컨테이너를 통해 관리함. 	-->
+<!-- 	hunter는 threa.sleep을 기반으로 1초의 간격으로 총 세번[shotgun - bibitab - shoutgun]을 공격함.  	-->
+<!-- 	한번 사용한 gun의 종류는 재사용하지 않음. 							-->
+
+<!--  -> 4개의 bean(bibitan, shotgun, hunter, localDateTime) 생성 	-->
+	<bean id="bibitan" class="kr.or.ddit.case2.material.Bibitan" scope="prototype"/>
+	<bean id="shotGun" class="kr.or.ddit.case2.material.ShotGun" scope="prototype" depends-on="bibitan"/>
+	
+	<bean id="hunter" class="kr.or.ddit.case2.material.Hunter" lazy-init="true"
+		p:gun-ref="shotGun"
+	/>
+	
+	<bean id="localDateTime" class="java.time.LocalDateTime" factory-method="now" scope="prototype"/>
+</beans>
